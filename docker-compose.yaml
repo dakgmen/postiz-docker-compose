@@ -5,10 +5,10 @@ services:
     restart: always
     environment:
       # === Required Settings
-      MAIN_URL: 'http://localhost:4007'
-      FRONTEND_URL: 'http://localhost:4007'
-      NEXT_PUBLIC_BACKEND_URL: 'http://localhost:4007/api'
-      JWT_SECRET: 'random string that is unique to every install - just type random characters here!'
+      MAIN_URL: 'https://postiz.pawalink.com'
+      FRONTEND_URL: 'https://postiz.pawalink.com'
+      NEXT_PUBLIC_BACKEND_URL: 'https://postiz.pawalink.com/api'
+      JWT_SECRET: '2f86545f53c29ae0eb805d35ebf349046c3d5b074cc501cf8ab61626b34befe9'
       DATABASE_URL: 'postgresql://postiz-user:postiz-password@postiz-postgres:5432/postiz-db-local'
       REDIS_URL: 'redis://postiz-redis:6379'
       BACKEND_INTERNAL_URL: 'http://localhost:3000'
@@ -42,14 +42,14 @@ services:
       GITHUB_CLIENT_SECRET: ''
       BEEHIIVE_API_KEY: ''
       BEEHIIVE_PUBLICATION_ID: ''
-      THREADS_APP_ID: ''
-      THREADS_APP_SECRET: ''
-      FACEBOOK_APP_ID: ''
-      FACEBOOK_APP_SECRET: ''
+      THREADS_APP_ID: '3800355043439909'
+      THREADS_APP_SECRET: '839c0e2ef6c522a8f28a95d968945c8b'
+      FACEBOOK_APP_ID: '1633812751066534'
+      FACEBOOK_APP_SECRET: '763f4116e9b18d5e13efc2fe5645a7f0'
       YOUTUBE_CLIENT_ID: ''
       YOUTUBE_CLIENT_SECRET: ''
-      TIKTOK_CLIENT_ID: ''
-      TIKTOK_CLIENT_SECRET: ''
+      TIKTOK_CLIENT_ID: 'sbawxuxq61oytlr3cu'
+      TIKTOK_CLIENT_SECRET: 'oPJRcFLIHCTXVF4zUIuWRorr0HUZhI2j'
       PINTEREST_CLIENT_ID: ''
       PINTEREST_CLIENT_SECRET: ''
       DRIBBBLE_CLIENT_ID: ''
@@ -110,6 +110,7 @@ services:
       # LINK_DRIP_SHORT_LINK_DOMAIN: "dripl.ink"
 
     volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - postiz-config:/config/
       - postiz-uploads:/uploads/
     ports:
@@ -117,6 +118,7 @@ services:
     networks:
       - postiz-network
       - temporal-network
+      - pawalink-stack
     depends_on:
       postiz-postgres:
         condition: service_healthy
@@ -267,3 +269,5 @@ networks:
   temporal-network:
     driver: bridge
     name: temporal-network
+  pawalink-stack:
+    external: true
